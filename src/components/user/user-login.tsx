@@ -5,8 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useMutation } from '@urql/next'
 
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { Input } from '@/src/components/ui/input'
+import { Button } from '@/src/components/ui/button'
 import {
   Form,
   FormControl,
@@ -14,7 +14,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from '@/components/ui/form'
+} from '@/src/components/ui/form'
 
 import { USER_LOGIN_MUTATION } from '@/graphql/user'
 
