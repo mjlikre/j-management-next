@@ -26,7 +26,7 @@ const formSchema = z.object({
 })
 
 export const UserLogin = () => {
-  const [{ error, fetching }, login] = useMutation(USER_LOGIN_MUTATION)
+  const [{ error }, login] = useMutation(USER_LOGIN_MUTATION)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
