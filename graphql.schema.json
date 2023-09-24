@@ -449,7 +449,7 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Debt",
+                "name": "Worker",
                 "ofType": null
               }
             },
@@ -482,7 +482,7 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "DebtPayment",
+                "name": "Worker",
                 "ofType": null
               }
             },
@@ -983,9 +983,13 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
               }
             ],
             "type": {
-              "kind": "OBJECT",
-              "name": "Worker",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Worker",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1508,9 +1512,13 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1576,9 +1584,13 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "UUID",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "UUID",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2788,7 +2800,7 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
               "kind": "NON_NULL",
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Debt",
+                "name": "Worker",
                 "ofType": null
               }
             },
@@ -2811,7 +2823,7 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
               "kind": "NON_NULL",
               "ofType": {
                 "kind": "OBJECT",
-                "name": "DebtPayment",
+                "name": "Worker",
                 "ofType": null
               }
             },
@@ -3161,9 +3173,12 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
           {
             "name": "worker",
             "type": {
-              "kind": "OBJECT",
-              "name": "Worker",
-              "ofType": null
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Worker",
+                "ofType": null
+              }
             },
             "args": [
               {
@@ -3401,8 +3416,11 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
           {
             "name": "debtAmount",
             "type": {
-              "kind": "SCALAR",
-              "name": "Any"
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
             },
             "args": []
           },
@@ -3449,8 +3467,11 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
           {
             "name": "id",
             "type": {
-              "kind": "SCALAR",
-              "name": "Any"
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
             },
             "args": []
           },
@@ -3552,14 +3573,40 @@ export type CreateWorkerMutationVariables = Exact<{
 }>;
 
 
-export type CreateWorkerMutation = { __typename?: 'Mutation', createWorker: { __typename?: 'Worker', id?: any | null, firstName: string, lastName: string, debtAmount?: number | null, salaryAmount: number } };
+export type CreateWorkerMutation = { __typename?: 'Mutation', createWorker: { __typename?: 'Worker', id: any, firstName: string, lastName: string, debtAmount: number, salaryAmount: number } };
 
 export type FetchWorkerDataQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
 }>;
 
 
-export type FetchWorkerDataQuery = { __typename?: 'Query', worker?: { __typename?: 'Worker', firstName: string, lastName: string, id?: any | null, debtAmount?: number | null, salaryAmount: number, debtPaymentAmount: number } | null };
+export type FetchWorkerDataQuery = { __typename?: 'Query', worker: { __typename?: 'Worker', firstName: string, lastName: string, id: any, debtAmount: number, salaryAmount: number, debtPaymentAmount: number } };
+
+export type FetchWorkersDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FetchWorkersDataQuery = { __typename?: 'Query', workers: Array<{ __typename?: 'Worker', firstName: string, lastName: string, id: any, debtAmount: number, salaryAmount: number, debtPaymentAmount: number }> };
+
+export type UpdateWorkerMutationVariables = Exact<{
+  updateWorkerInput: UpdateWorkerInput;
+}>;
+
+
+export type UpdateWorkerMutation = { __typename?: 'Mutation', updateWorker: { __typename?: 'Worker', id: any, firstName: string, lastName: string, debtAmount: number, salaryAmount: number } };
+
+export type AddDebtMutationVariables = Exact<{
+  createDebtInput: CreateDebtInput;
+}>;
+
+
+export type AddDebtMutation = { __typename?: 'Mutation', createDebt: { __typename?: 'Worker', id: any, debtAmount: number, debtPaymentAmount: number } };
+
+export type AddDebtPaymentMutationVariables = Exact<{
+  createDebtPaymentInput: CreateDebtPaymentInput;
+}>;
+
+
+export type AddDebtPaymentMutation = { __typename?: 'Mutation', createDebtPayment: { __typename?: 'Worker', id: any, debtAmount: number, debtPaymentAmount: number } };
 
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -3616,8 +3663,8 @@ export type LoginInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createDebt: Debt;
-  createDebtPayment: DebtPayment;
+  createDebt: Worker;
+  createDebtPayment: Worker;
   createSalary: Salary;
   createUser: UserAuth;
   createWorker: Worker;
@@ -3691,7 +3738,7 @@ export type Query = {
   getWorkerSalaries: Array<Salary>;
   user: User;
   validateUser: User;
-  worker?: Maybe<Worker>;
+  worker: Worker;
   workers: Array<Worker>;
 };
 
@@ -3769,11 +3816,11 @@ export type Worker = {
   __typename?: 'Worker';
   createdAt: Scalars['DATE']['output'];
   debt: Array<Debt>;
-  debtAmount?: Maybe<Scalars['Int']['output']>;
+  debtAmount: Scalars['Int']['output'];
   debtPayment: Array<DebtPayment>;
   debtPaymentAmount: Scalars['Int']['output'];
   firstName: Scalars['String']['output'];
-  id?: Maybe<Scalars['UUID']['output']>;
+  id: Scalars['UUID']['output'];
   lastName: Scalars['String']['output'];
   phone?: Maybe<Scalars['String']['output']>;
   salary: Array<Salary>;
