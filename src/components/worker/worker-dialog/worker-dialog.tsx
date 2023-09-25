@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { Plus } from 'react-feather'
 
 import { displayName } from '@/src/lib/user'
 
@@ -16,7 +15,7 @@ import { Input } from '@/src/components/ui/input'
 
 import { WorkerDialogProps } from './types'
 import { useWorkerDialog } from './use-worker-dialog'
-import { DatePicker } from '../../date-picker/date-picker'
+import { DatePicker } from '../../date-picker'
 import { WorkerDialogSelect } from './worker-dialog-select'
 
 const className = 'grid grid-cols-2 gap-4 py-4'

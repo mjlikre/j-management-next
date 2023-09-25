@@ -3,8 +3,9 @@
 import { UrqlProvider, ssrExchange } from '@urql/next'
 import { ReactNode, useMemo } from 'react'
 import { makeClient } from '@/lib/graphql'
+import { CookiesProvider } from 'react-cookie'
 
-export const Provider = ({ children }: { children: ReactNode}) => {
+export const Provider = ({ children }: { children: ReactNode }) => {
   const [client, ssr] = useMemo(() => {
     const ssr = ssrExchange()
     const client = makeClient()
@@ -13,7 +14,7 @@ export const Provider = ({ children }: { children: ReactNode}) => {
 
   return (
     <UrqlProvider client={client} ssr={ssr}>
-        {children}
+      <CookiesProvider>{children}</CookiesProvider>
     </UrqlProvider>
   )
 }

@@ -3,9 +3,14 @@ import { useMutation } from '@urql/next'
 
 import { ADD_NEW_DEBT, ADD_NEW_DEBT_PAYMENT } from '@/graphql/worker'
 import { FetchWorkersWorker } from '@/src/types/worker'
-import { executeMutation } from '@/src/lib/execute-mutation'
+import { useToast } from '../../ui/use-toast'
+import {
+  CreateDebtInput,
+  CreateDebtPaymentInput
+} from '@/src/__generated__/graphql'
 
 export const useWorkerDialog = (worker: FetchWorkersWorker) => {
+  const { toast } = useToast()
   const [open, setOpen] = useState(false)
   const [debtOrPayment, setDebtOrPayment] = useState('debt')
   const [value, setValue] = useState(0)
@@ -22,29 +27,52 @@ export const useWorkerDialog = (worker: FetchWorkersWorker) => {
 
   const inputText = debtOrPayment === 'debt' ? 'Prestamo:' : 'Abono:'
 
+  const addNewDebt = async (payload: CreateDebtInput) => {
+    const { error } = await addNewDebtMutation({ createDebtInput: payload })
+    if (!error) {
+      toast({
+        title: 'Accion Exitosa',
+        description: 'Prestamo agregado exitosamente'
+      })
+    } else {
+      toast({
+        title: 'Accion Fallida',
+        description: 'Error al procesar accion'
+      })
+    }
+  }
+
+  const addNewDebtPayment = async (payload: CreateDebtPaymentInput) => {
+    const { error } = await addNewDebtPaymentMutation({
+      createDebtPaymentInput: payload
+    })
+    if (!error) {
+      toast({
+        title: 'Accion Exitosa',
+        description: 'Abono agregado exitosamente'
+      })
+    } else {
+      toast({
+        title: 'Accion Fallida',
+        description: 'Error al procesar accion'
+      })
+    }
+  }
+
   const onSubmit = async () => {
     const payload = {
       workerId: worker.id,
       amount: value,
-      date: date ? date.toISOString() : new Date().toISOString()
+      date: date ? date.valueOf() : new Date().valueOf()
     }
+
     if (debtOrPayment === 'debt') {
-      await executeMutation({
-        mutationFn: async () => {
-          await addNewDebtMutation({ createDebtInput: payload })
-        },
-        successMessage: 'Prestamo agregado exitosamente',
-        failureMessage: 'Error al agregar prestamo'
-      })
+      addNewDebt(payload)
     } else {
-      await executeMutation({
-        mutationFn: async () => {
-          await addNewDebtPaymentMutation({ createDebtPaymentInput: payload })
-        },
-        successMessage: 'Abono agregado exitosamente',
-        failureMessage: 'Error al agregar abono'
-      })
+      addNewDebtPayment(payload)
     }
+
+    setOpen(false)
   }
 
   return {

@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { DataTable } from "../../table/table"
+import { DataTable } from "../../table"
 import { WorkersTableProps } from "./types"
 import { makeColumns } from "./columns"
 

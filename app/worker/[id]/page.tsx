@@ -8,16 +8,8 @@ type Props = {
 
 export default async function WorkerPage(props: Props) {
   const id = props.params.id
-  const client = getGraphqlClient()
-  const result = await client.query(FETCH_WORKER, { id })
-
-  const worker = result.data?.worker
-
-  if (!worker) {
-    return <p>No se pudo procesar el peticion</p>
-  }
 
   return (
-    <Worker worker={worker}/>
+    <Worker workerId={id}/>
   )
 }

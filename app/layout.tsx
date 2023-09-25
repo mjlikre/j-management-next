@@ -1,9 +1,10 @@
-import { Provider } from '@/src/components/urql-provider/urql-provider'
-import { Toaster } from "@/src/components/ui/toaster"
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
+import { Navigation } from '@/src/components/navigation'
+import { Provider } from '@/src/components/urql-provider/urql-provider'
+import { Toaster } from '@/src/components/ui/toaster'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -21,7 +22,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <main>
           <Provider>
-            <div className="h-screen w-full">{children}</div>
+              <div className="h-screen w-full">
+                <Navigation />
+                {children}
+              </div>
           </Provider>
           <Toaster />
         </main>
