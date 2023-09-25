@@ -17,6 +17,7 @@ import {
 } from '@/src/components/ui/form'
 
 import { USER_LOGIN_MUTATION } from '@/graphql/user'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   userName: z.string().min(2, {
@@ -26,6 +27,7 @@ const formSchema = z.object({
 })
 
 export const UserLogin = () => {
+  const router = useRouter()
   const [{ error }, login] = useMutation(USER_LOGIN_MUTATION)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -37,15 +39,19 @@ export const UserLogin = () => {
   })
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    login({ loginInput: values })
+    try {
+      await login({ loginInput: values })
+      router.push('/dashboard')
+    } catch (e) {
+      console.log(e)
+    }
+
   }
 
   const errorText = () => {
     const { graphQLErrors, networkError } = error || {}
     if (graphQLErrors) {
       const errorMessage = graphQLErrors[0].message
-      console.log(errorMessage)
-
       if (errorMessage === 'Not Found') {
         return 'User Does not exist'
       }

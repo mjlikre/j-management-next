@@ -1,25 +1,14 @@
 'use client'
-import { useQuery } from '@urql/next'
-import { FETCH_WORKERS } from '@/graphql/worker'
-import { DataTable, makeColumns } from './workers-table'
 
-export const Dashboard = () => {
-  const [result] = useQuery({
-    query: FETCH_WORKERS
-  })
+import { WorkersTable } from '../worker/workers-table'
+import { FC } from 'react'
+import { DashboardProps } from './types'
 
-  const { data, fetching, error } = result
-
-  if (fetching) return <p>Loading...</p>
-  if (error) return <p>Oh no... {error.message}</p>
-
-  const { workers = [] } = data || {}
-
-  const columns = makeColumns()
+export const Dashboard: FC<DashboardProps> = ({ workers }) => {
 
   return (
     <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={workers} />
+      <WorkersTable workers={workers} />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { Provider } from '@/src/components/urql-provider/urql-provider'
+import { Toaster } from "@/src/components/ui/toaster"
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -22,6 +23,7 @@ export default function RootLayout({
           <Provider>
             <div className="h-screen w-full">{children}</div>
           </Provider>
+          <Toaster />
         </main>
       </body>
     </html>

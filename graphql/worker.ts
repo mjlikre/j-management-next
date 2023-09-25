@@ -15,12 +15,25 @@ export const CREATE_WORKER_MUTATION = gql(`
 export const FETCH_WORKER = gql(`
     query FetchWorkerData($id: UUID!) {
         worker(id: $id) {
+            id
             firstName
             lastName
-            id
             debtAmount
             salaryAmount
             debtPaymentAmount
+            phone
+            debts {
+                id
+                amount
+                date
+                createdAt
+            }
+            debtPayments {
+                id
+                amount
+                date
+                createdAt
+            }
         }
     }
 `)

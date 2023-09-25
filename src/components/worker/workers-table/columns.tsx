@@ -3,6 +3,8 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { FetchWorkersWorker } from '@/src/types/worker'
 import { WorkerDialog } from '../worker-dialog'
+import Link from 'next/link'
+import { PlusCircle } from 'react-feather'
 
 export const makeColumns = () => {
   const columns: ColumnDef<FetchWorkersWorker>[] = [
@@ -29,7 +31,19 @@ export const makeColumns = () => {
     {
       cell: props => {
         const worker = props.row.original
-        return <WorkerDialog worker={worker}/>
+        return (
+          <WorkerDialog
+            worker={worker}
+            displayComponent={<PlusCircle />}
+          />
+        )
+      },
+      header: 'Agregar'
+    },
+    {
+      cell: props => {
+        const { id } = props.row.original
+        return <Link href={`/worker/${id}`}>Ver</Link>
       },
       header: ' '
     }

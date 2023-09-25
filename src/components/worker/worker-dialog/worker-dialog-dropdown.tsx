@@ -1,6 +1,7 @@
 'use client'
 
 import { FC } from 'react'
+import { ChevronDown } from 'react-feather'
 
 import { Button } from '@/src/components/ui/button'
 import {
@@ -19,8 +20,9 @@ export const WorkerDialogDropdown: FC<WorkerDialogDropdownProps> = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" className='w-1/2'>
           {debtOrPayment === 'debt' ? 'Prestamo' : 'Abono'}
+          <ChevronDown />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">

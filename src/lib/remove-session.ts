@@ -1,4 +1,5 @@
 import Cookie from 'js-cookie'
+import { useRouter } from 'next/navigation'
 
 export const removeSessionCookies = () => {
   const cookieOpts = {
@@ -7,4 +8,10 @@ export const removeSessionCookies = () => {
   }
 
   Cookie.remove(process.env.NEXT_PUBLIC_COOKIE_NAME!, cookieOpts)
+}
+
+export const logOut = () => {
+  const router = useRouter()
+  removeSessionCookies()
+  router.push('/user/login')
 }
