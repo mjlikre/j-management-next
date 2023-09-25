@@ -1,16 +1,16 @@
 import { FetchWorkersWorker } from '@/src/types/worker'
 
-export interface WorkerDialogProps {
+export interface WorkerDebtDialogProps {
   worker: FetchWorkersWorker
   displayComponent: React.ReactNode
 }
 
-export interface WorkerDialogDropdownProps {
+export interface WorkerDebtDialogDropdownProps {
   debtOrPayment: string
   setDebtOrPayment: (_: string) => void
 }
 
-export interface WorkerDialogSelectProps {
+export interface WorkerDebtDialogSelectProps {
   debtOrPayment: string
   setDebtOrPayment: (_: string) => void
 }

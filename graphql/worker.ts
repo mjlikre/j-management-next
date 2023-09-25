@@ -8,6 +8,7 @@ export const CREATE_WORKER_MUTATION = gql(`
             lastName
             debtAmount
             salaryAmount
+            phone
         }
     }
 `)
@@ -79,6 +80,14 @@ export const ADD_NEW_DEBT_PAYMENT = gql(`
             id,
             debtAmount,
             debtPaymentAmount
+        }
+    }
+`)
+
+export const REMOVE_WORKER = gql(`
+    mutation RemoveWorker($id: UUID!) {
+        removeWorker(id: $id) {
+            id
         }
     }
 `)

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { WorkerComponentProps } from './types'
 import { displayName } from '@/src/lib/user'
-import { WorkerDialog } from './worker-dialog'
+import { WorkerDebtDialog } from './worker-debt-dialog'
 import { PlusCircle } from 'react-feather'
 
 export const WorkerHeaders: FC<WorkerComponentProps> = ({ worker }) => {
@@ -15,7 +15,7 @@ export const WorkerHeaders: FC<WorkerComponentProps> = ({ worker }) => {
         <div className="font-bold">Deuda: {worker.debtAmount - worker.debtPaymentAmount}</div>
       </div>
       <div className='grid justify-items-end'>
-        <WorkerDialog
+        <WorkerDebtDialog
           worker={worker}
           displayComponent={
             <div className='flex border-2 border-solid border-blue-400 p-2 rounded-full text-blue-400 hover:bg-slate-100'>

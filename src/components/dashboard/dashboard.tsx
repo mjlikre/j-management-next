@@ -4,6 +4,7 @@ import { useQuery } from '@urql/next'
 import { FETCH_WORKERS } from '@/graphql/worker'
 import { WorkersTable } from '../worker'
 import { logOut } from '@/src/lib/remove-session'
+import { DashboardHeader } from './dashboard-header'
 
 export const Dashboard = () => {
   const [result] = useQuery({
@@ -16,7 +17,7 @@ export const Dashboard = () => {
   if (error) {
     const errorMessage = error.graphQLErrors[0].message
     if (errorMessage === 'Unauthorized') {
-        logOut()
+      logOut()
     }
     return <p>Oh no... {errorMessage}</p>
   }
@@ -25,6 +26,7 @@ export const Dashboard = () => {
 
   return (
     <div className="container mx-auto py-10">
+      <DashboardHeader />
       <WorkersTable workers={workers} />
     </div>
   )

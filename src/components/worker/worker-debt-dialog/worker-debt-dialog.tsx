@@ -13,14 +13,14 @@ import {
 import { Button } from '@/src/components/ui/button'
 import { Input } from '@/src/components/ui/input'
 
-import { WorkerDialogProps } from './types'
-import { useWorkerDialog } from './use-worker-dialog'
+import { WorkerDebtDialogProps } from './types'
+import { useWorkerDebt } from './use-worker-debt'
 import { DatePicker } from '../../date-picker'
-import { WorkerDialogSelect } from './worker-dialog-select'
+import { WorkerDebtDialogSelect } from './worker-debt-dialog-select'
 
 const className = 'grid grid-cols-2 gap-4 py-4'
 
-export const WorkerDialog: FC<WorkerDialogProps> = ({ worker, displayComponent }) => {
+export const WorkerDebtDialog: FC<WorkerDebtDialogProps> = ({ worker, displayComponent }) => {
   const {
     date,
     setDate,
@@ -34,7 +34,7 @@ export const WorkerDialog: FC<WorkerDialogProps> = ({ worker, displayComponent }
     updatedDebt,
     inputText,
     onSubmit
-  } = useWorkerDialog(worker)
+  } = useWorkerDebt(worker)
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -46,7 +46,7 @@ export const WorkerDialog: FC<WorkerDialogProps> = ({ worker, displayComponent }
           <DialogTitle>{displayName(worker)}</DialogTitle>
         </DialogHeader>
 
-        <WorkerDialogSelect
+        <WorkerDebtDialogSelect
           debtOrPayment={debtOrPayment}
           setDebtOrPayment={setDebtOrPayment}
         />

@@ -11,9 +11,9 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger
 } from '@/src/components/ui/dropdown-menu'
-import { WorkerDialogDropdownProps } from './types'
+import { WorkerDebtDialogDropdownProps } from './types'
 
-export const WorkerDialogDropdown: FC<WorkerDialogDropdownProps> = ({
+export const WorkerDebtDialogDropdown: FC<WorkerDebtDialogDropdownProps> = ({
   debtOrPayment,
   setDebtOrPayment
 }) => {

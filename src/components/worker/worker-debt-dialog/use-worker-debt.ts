@@ -9,7 +9,7 @@ import {
   CreateDebtPaymentInput
 } from '@/src/__generated__/graphql'
 
-export const useWorkerDialog = (worker: FetchWorkersWorker) => {
+export const useWorkerDebt = (worker: FetchWorkersWorker) => {
   const { toast } = useToast()
   const [open, setOpen] = useState(false)
   const [debtOrPayment, setDebtOrPayment] = useState('debt')

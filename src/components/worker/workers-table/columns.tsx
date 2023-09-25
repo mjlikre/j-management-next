@@ -2,7 +2,7 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 import { FetchWorkersWorker } from '@/src/types/worker'
-import { WorkerDialog } from '../worker-dialog'
+import { WorkerDebtDialog } from '../worker-debt-dialog'
 import Link from 'next/link'
 import { PlusCircle } from 'react-feather'
 
@@ -32,7 +32,7 @@ export const makeColumns = () => {
       cell: props => {
         const worker = props.row.original
         return (
-          <WorkerDialog
+          <WorkerDebtDialog
             worker={worker}
             displayComponent={<PlusCircle />}
           />

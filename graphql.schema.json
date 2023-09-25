@@ -205,6 +205,22 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
         "fields": null,
         "inputFields": [
           {
+            "name": "debtAmount",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -3659,7 +3675,7 @@ export type CreateWorkerMutationVariables = Exact<{
 }>;
 
 
-export type CreateWorkerMutation = { __typename?: 'Mutation', createWorker: { __typename?: 'Worker', id: any, firstName: string, lastName: string, debtAmount: number, salaryAmount: number } };
+export type CreateWorkerMutation = { __typename?: 'Mutation', createWorker: { __typename?: 'Worker', id: any, firstName: string, lastName: string, debtAmount: number, salaryAmount: number, phone?: string | null } };
 
 export type FetchWorkerDataQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -3724,6 +3740,7 @@ export type CreateUserInput = {
 };
 
 export type CreateWorkerInput = {
+  debtAmount: Scalars['Int']['input'];
   firstName: Scalars['String']['input'];
   lastName: Scalars['String']['input'];
   phone?: InputMaybe<Scalars['String']['input']>;

@@ -59,6 +59,7 @@
     "@graphql-codegen/cli": "5.0.0",
     "@graphql-codegen/client-preset": "4.1.0",
     "@graphql-codegen/introspection": "4.0.0",
+    "@testing-library/react": "^14.0.0",
     "@types/js-cookie": "^3.0.4",
     "@types/ramda": "^0.29.4",
     "prettier-plugin-tailwindcss": "^0.5.4"

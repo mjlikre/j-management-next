@@ -6,9 +6,9 @@ import {
   SelectValue
 } from '@/src/components/ui/select'
 import { FC } from 'react'
-import { WorkerDialogSelectProps } from './types'
+import { WorkerDebtDialogSelectProps } from './types'
 
-export const WorkerDialogSelect: FC<WorkerDialogSelectProps> = ({ debtOrPayment, setDebtOrPayment }) => {
+export const WorkerDebtDialogSelect: FC<WorkerDebtDialogSelectProps> = ({ debtOrPayment, setDebtOrPayment }) => {
   return (
     <Select onValueChange={setDebtOrPayment} defaultValue={debtOrPayment}>
       <SelectTrigger className="w-[180px]">
