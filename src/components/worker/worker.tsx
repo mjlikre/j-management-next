@@ -23,7 +23,6 @@ export const Worker: FC<WorkerProps> = ({ workerId }) => {
 
   if (fetching) return <p>Loading...</p>
   if (error) {
-    console.log(error.graphQLErrors[0].message)
     if (error.graphQLErrors[0].message === 'Unauthorized') {
       logOut()
     }

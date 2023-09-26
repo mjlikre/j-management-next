@@ -1,31 +1,38 @@
-import { Input } from '@/src/components/ui/input'
-import { Button } from '@/src/components/ui/button'
+import { FC } from 'react'
 
 import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle
-} from '@/src/components/ui/dialog'
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from '@/src/components/ui/alert-dialog'
+import { useDeleteWorker } from './use-delete-worker'
+import { DeleteWorkerDialogProps } from './types'
+import { displayName } from '@/src/lib/user'
 
-export const CreateWorkerDialog = () => {
+export const DeleteWorkerDialog: FC<DeleteWorkerDialogProps> = ({ worker }) => {
+  const { open, setOpen, handleDeleteWorker } = useDeleteWorker()
   return (
-    <Dialog open={open} onOpenChange={setOpen} modal={true} >
-      <DialogTrigger className="my-2 rounded-lg border border-solid border-slate-200 p-2 text-blue-500 hover:bg-slate-200 hover:text-slate-400">
-        Agregar Trabajador
-      </DialogTrigger>
-      <DialogContent className='h-1/2'>
-        <DialogHeader>
-          <DialogTitle>Agregar un nuevo trabajador</DialogTitle>
-        </DialogHeader>
-        
-      </DialogContent>
-    </Dialog>
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogTrigger className='p-2 bg-red-500 text-white rounded-lg'>Eliminar</AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Eliminar a {displayName(worker)}</AlertDialogTitle>
+          <AlertDialogDescription>
+            Esta acción no se puede deshacer. Esto eliminará permanentemente a{' '}
+            {displayName(worker)} y sus datos de nuestros servidores.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+          <AlertDialogAction onClick={() => handleDeleteWorker(worker.id)}>Confirmar</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   )
-}
-
-
-export const DeleteWorkerDialog = () => {
-
 }

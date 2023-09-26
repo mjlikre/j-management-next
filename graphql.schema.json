@@ -752,9 +752,21 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
               }
             ],
             "type": {
-              "kind": "OBJECT",
-              "name": "Worker",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Worker",
+                    "ofType": null
+                  }
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -3057,9 +3069,18 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
           {
             "name": "removeWorker",
             "type": {
-              "kind": "OBJECT",
-              "name": "Worker",
-              "ofType": null
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Worker",
+                    "ofType": null
+                  }
+                }
+              }
             },
             "args": [
               {
@@ -3710,6 +3731,13 @@ export type AddDebtPaymentMutationVariables = Exact<{
 
 export type AddDebtPaymentMutation = { __typename?: 'Mutation', createDebtPayment: { __typename?: 'Worker', id: any, debtAmount: number, debtPaymentAmount: number } };
 
+export type RemoveWorkerMutationVariables = Exact<{
+  id: Scalars['UUID']['input'];
+}>;
+
+
+export type RemoveWorkerMutation = { __typename?: 'Mutation', removeWorker: Array<{ __typename?: 'Worker', id: any }> };
+
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -3777,7 +3805,7 @@ export type Mutation = {
   createWorker: Worker;
   login: UserAuth;
   removeUser?: Maybe<User>;
-  removeWorker?: Maybe<Worker>;
+  removeWorker: Array<Worker>;
   updateUser: User;
   updateWorker: Worker;
   updateWorkerDebt: Worker;

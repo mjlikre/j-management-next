@@ -5,6 +5,7 @@ import { FetchWorkersWorker } from '@/src/types/worker'
 import { WorkerDebtDialog } from '../worker-debt-dialog'
 import Link from 'next/link'
 import { PlusCircle } from 'react-feather'
+import { DeleteWorkerDialog } from '../delete-worker-dialog'
 
 export const makeColumns = () => {
   const columns: ColumnDef<FetchWorkersWorker>[] = [
@@ -34,7 +35,7 @@ export const makeColumns = () => {
         return (
           <WorkerDebtDialog
             worker={worker}
-            displayComponent={<PlusCircle />}
+            displayComponent={<PlusCircle className='text-green-500'/>}
           />
         )
       },
@@ -43,7 +44,14 @@ export const makeColumns = () => {
     {
       cell: props => {
         const { id } = props.row.original
-        return <Link href={`/worker/${id}`}>Ver</Link>
+        return <Link href={`/worker/${id}`} className='p-2 bg-blue-400 text-white hover:text-slate-400 rounded-lg'>Ver Detalles</Link>
+      },
+      header: ' '
+    },
+    {
+      cell: props => {
+        const worker = props.row.original
+        return <DeleteWorkerDialog worker={worker}/>
       },
       header: ' '
     }
