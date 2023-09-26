@@ -1,100 +1,103 @@
 import { Input } from '@/src/components/ui/input'
 import { Button } from '@/src/components/ui/button'
+import { Label } from '@/src/components/ui/label'
 
 import {
   Dialog,
   DialogTrigger,
   DialogContent,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
+  DialogFooter
 } from '@/src/components/ui/dialog'
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@/src/components/ui/form'
 import { useCreateWorker } from './use-create-worker'
+import { DatePicker } from '../../date-picker'
 
 export const CreateWorkerDialog = () => {
-  const { form, onSubmit, open, setOpen, onCancel } = useCreateWorker()
+  const {
+    firstName,
+    lastName,
+    phone,
+    debt,
+    salary,
+    setDebt,
+    setFirstName,
+    setLastName,
+    setPhone,
+    setSalary,
+    onSubmit,
+    open,
+    setOpen,
+    onCancel,
+    date,
+    setDate
+  } = useCreateWorker()
   return (
-    <Dialog open={open} onOpenChange={setOpen} modal={true} >
+    <Dialog open={open} onOpenChange={setOpen} modal={true}>
       <DialogTrigger className="my-2 rounded-lg border border-solid border-slate-200 p-2 text-blue-500 hover:bg-slate-200 hover:text-slate-400">
         Agregar Trabajador
       </DialogTrigger>
-      <DialogContent className='h-1/2'>
+      <DialogContent className="h-1/2">
         <DialogHeader>
           <DialogTitle>Agregar un nuevo trabajador</DialogTitle>
         </DialogHeader>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 rounded border border-solid border-slate-400 p-8">
-            <FormField
-              control={form.control}
-              name="firstName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nombre</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Juan" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+        <div className="mb-2">
+          <div className="py-2">
+            <Label className="pb-2">Nombre</Label>
+            <Input
+              placeholder="Juan"
+              value={firstName}
+              onChange={event => setFirstName(event.target.value)}
             />
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Apellido</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Gutierrez" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+          </div>
+          <div className="py-2">
+            <Label className="pb-2">Apellido</Label>
+            <Input
+              placeholder="Perez"
+              value={lastName}
+              onChange={event => setLastName(event.target.value)}
             />
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Telefono</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="80808080"
-                      {...field}
-                      value={field.value ?? ''}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+          </div>
+          <div className="py-2">
+            <Label className="pb-2">Telefono</Label>
+            <Input
+              placeholder="88888888"
+              value={phone}
+              onChange={event => setPhone(event.target.value)}
             />
-            <FormField
-              control={form.control}
-              name="salaryAmount"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Salario Mensual</FormLabel>
-                  <FormControl>
-                    <Input {...field} type='number'/>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+          </div>
+          <div className="py-2">
+            <Label className="pb-2">Salario Mensual</Label>
+            <Input
+              placeholder="5000"
+              value={salary}
+              onChange={event => setSalary(Number(event.target.value))}
             />
-           
-            <Button className='mr-2'  variant='outline' type="reset" onClick={onCancel}>Cancelar</Button>
-            <Button type="submit">Agregar</Button>
-          </form>
-        </Form>
+          </div>
+          <div className="py-2">
+            <Label className="pb-2">Deuda</Label>
+            <Input
+              value={debt}
+              onChange={event => setDebt(Number(event.target.value))}
+            />
+          </div>
+          <div className="flex flex-col">
+            <DatePicker date={date} setDate={setDate} />
+          </div>
+        </div>
+        <DialogFooter>
+          <Button
+            className="mr-2"
+            variant="outline"
+            type="reset"
+            onClick={onCancel}>
+            Cancelar
+          </Button>
+          <Button type="submit" onClick={onSubmit}>
+            Agregar
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   )

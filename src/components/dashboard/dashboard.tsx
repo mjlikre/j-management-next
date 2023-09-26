@@ -5,6 +5,7 @@ import { FETCH_WORKERS } from '@/graphql/worker'
 import { WorkersTable } from '../worker'
 import { logOut } from '@/src/lib/remove-session'
 import { DashboardHeader } from './dashboard-header'
+import { DatePicker } from '../date-picker'
 
 export const Dashboard = () => {
   const [result] = useQuery({

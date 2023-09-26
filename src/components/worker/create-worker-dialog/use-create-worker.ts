@@ -1,47 +1,31 @@
 import { useEffect, useState } from 'react'
 import { useMutation } from 'urql'
-import * as z from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 
 import { CREATE_WORKER_MUTATION } from '@/graphql/worker'
-
-const formSchema = z.object({
-  firstName: z.string().min(1, {
-    message: 'Nombre no puede estar vacillo'
-  }),
-  lastName: z.string().min(1, {
-    message: 'Apellido no puede estar vacillo'
-  }),
-  salaryAmount: z.preprocess(
-    a => parseInt(z.string().parse(a)),
-    z
-      .number()
-      .positive()
-      .positive({ message: 'Salario mensual debe ser mas de 0' })
-  ),
-  phone: z.string().nullable(),
-  debtAmount: z.number().int().default(0)
-})
+import { set } from 'date-fns'
 
 export const useCreateWorker = () => {
   const [open, setOpen] = useState(false)
+  const [date, setDate] = useState<Date | undefined>(new Date())
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [debt, setDebt] = useState(0)
+  const [salary, setSalary] = useState(0)
   const [_, addNewWorkerMutation] = useMutation(CREATE_WORKER_MUTATION)
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      phone: '',
-      debtAmount: 0,
-      salaryAmount: 0
-    }
-  })
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async () => {
     try {
-      await addNewWorkerMutation({ workerInput: values })
+      await addNewWorkerMutation({
+        workerInput: {
+          firstName,
+          lastName,
+          phone,
+          salaryAmount: salary,
+          debtAmount: debt,
+          startDate: date
+        }
+      })
     } catch (e) {
       console.log(e)
     }
@@ -53,12 +37,28 @@ export const useCreateWorker = () => {
   }
 
   useEffect(() => {
-    form.reset()
+    setFirstName('')
+    setLastName('')
+    setPhone('')
+    setDebt(0)
+    setSalary(0)
+    setDate(new Date())
   }, [open])
 
   return {
     open,
-    form,
+    date,
+    firstName,
+    salary,
+    debt,
+    lastName,
+    phone,
+    setFirstName,
+    setLastName,
+    setPhone,
+    setSalary,
+    setDebt,
+    setDate,
     setOpen,
     onSubmit,
     onCancel

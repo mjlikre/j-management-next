@@ -279,6 +279,22 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "startDate",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DATE",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -1749,6 +1765,22 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
               "ofType": {
                 "kind": "SCALAR",
                 "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "startDate",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DATE",
                 "ofType": null
               }
             },
@@ -3647,6 +3679,17 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
             "args": []
           },
           {
+            "name": "startDate",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
             "name": "updatedAt",
             "type": {
               "kind": "SCALAR",
@@ -3773,6 +3816,7 @@ export type CreateWorkerInput = {
   lastName: Scalars['String']['input'];
   phone?: InputMaybe<Scalars['String']['input']>;
   salaryAmount: Scalars['Int']['input'];
+  startDate: Scalars['DATE']['input'];
 };
 
 export type Debt = {
@@ -3960,5 +4004,6 @@ export type Worker = {
   phone?: Maybe<Scalars['String']['output']>;
   salaries: Array<Salary>;
   salaryAmount: Scalars['Int']['output'];
+  startDate: Scalars['DATE']['output'];
   updatedAt?: Maybe<Scalars['DATE']['output']>;
 };
